@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = $request->user()->posts()->with('tags')->get();
+        $posts = $request->user()->posts()->with('tags')->paginate(5);
         if($posts){
             return ApiResponse::sendResponse(200,'All Posts For this User',PostResource::collection($posts));
         }

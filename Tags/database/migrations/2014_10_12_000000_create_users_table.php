@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection('sqlite')->create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('phone_number')->unique();
             $table->string('password');
             $table->string('verification_code')->nullable();
-            $table->timestamp('phone_verified_at')->nullable(); 
+            $table->timestamp('phone_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

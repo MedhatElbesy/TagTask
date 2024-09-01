@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(5);
         if($tags){
             return ApiResponse::sendResponse(200,'All Tags', TagResource::collection($tags));
         }
