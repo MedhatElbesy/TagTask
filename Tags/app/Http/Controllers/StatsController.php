@@ -12,7 +12,7 @@ class StatsController extends Controller
     public function stats()
     {
         try {
-            $stats = cache()->remember('stats', now()->addMinutes(10), function () {
+            $stats = cache()->rememberForever('stats',function () {
                 return [
                     'total_users' => User::count(),
                     'total_posts' => Post::count(),
