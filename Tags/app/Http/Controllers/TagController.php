@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ApiResponse;
-use App\Http\Requests\storeTagContoller;
+use App\Helpers\ApiResponse;;
 use App\Http\Requests\storeTagRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
@@ -51,7 +50,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(storeTagRequest $request, $id)
+    public function update(StoreTagRequest $request, $id)
     {
         try {
             $tag = Tag::findOrFail($id);

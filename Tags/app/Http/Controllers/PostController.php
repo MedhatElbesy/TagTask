@@ -73,7 +73,12 @@ class PostController extends Controller
             $validatedData = $request->validated();
 
             if ($request->hasFile('cover_image')) {
-                $this->replaceCoverImage($post, $request);
+                if ($post->cover_image) {
+                    Storage::disk('public')->delete($post->cover_image);
+                }
+
+                $path = $this->uploadImage($request, 'cover_image', 'cover_images');
+                $validatedData['cover_image'] = $path;
             }
 
             $post->update($validatedData);
@@ -129,15 +134,4 @@ class PostController extends Controller
 
     }
 
-    private function replaceCoverImage($post, $request)
-    {
-        if ($post->cover_image) {
-            // dd($post->cover_image);
-            Storage::disk('public')->delete($post->cover_image);
-        }
-
-        $path = $this->uploadImage($request, 'cover_image', 'cover_images');
-        $post->update(['cover_image' => $path]);
-        // dd($post);
-    }
 }

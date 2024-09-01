@@ -20,7 +20,7 @@ class PostResource extends JsonResource
             'body'        => $this->body,
             'cover_image' => $this->cover_image,
             'pinned'      => $this->pinned,
-            'user_id'     => $this->user_id,
+            'user_name'     => $this->user->name,
             'tag'         => TagResource::collection($this->whenLoaded('tags')),
 
         ];

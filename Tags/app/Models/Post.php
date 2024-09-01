@@ -6,6 +6,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
@@ -29,6 +30,21 @@ class Post extends Model
 
         static::addGlobalScope('pinned', function (Builder $builder) {
             $builder->orderBy('pinned', 'desc');
+        });
+    }
+
+    protected static function booted()
+    {
+        static::created(function () {
+            Cache::forget('stats');
+        });
+
+        static::updated(function () {
+            Cache::forget('stats');
+        });
+
+        static::deleted(function () {
+            Cache::forget('stats');
         });
     }
 }
