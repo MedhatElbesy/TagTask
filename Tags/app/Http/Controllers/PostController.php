@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     use UploadImageTrait;
+    
     /**
      * Display a listing of the resource.
      */

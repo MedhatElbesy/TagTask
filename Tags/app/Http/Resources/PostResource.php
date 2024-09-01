@@ -18,11 +18,13 @@ class PostResource extends JsonResource
             'id'          => $this->id,
             'title'       => $this->title,
             'body'        => $this->body,
-            'cover_image' => $this->cover_image,
+            'cover_image' => asset($this->cover_image),
             'pinned'      => $this->pinned,
-            'user_name'     => $this->user->name,
+            'user_name'   => $this->user->name,
             'tag'         => TagResource::collection($this->whenLoaded('tags')),
-
         ];
     }
+
+
+
 }
